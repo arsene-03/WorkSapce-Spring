@@ -1,0 +1,5 @@
+package spring.printer;
+
+public class MemberListPrinter { //전체 회원 조회
+
+}

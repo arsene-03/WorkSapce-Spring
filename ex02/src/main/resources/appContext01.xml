@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 스프링 컨테이너 영역 -->
+	<bean id="memberdao" class="spring.dao.MemberDAO"/>
+	<bean id="memberRegSvc" class="spring.service.MemberRegisterService">
+		<constructor-arg ref="memberdao"/>
+	</bean>
+	
+	<bean id="changePwdSvc" class="spring.service.ChangePasswordService">
+		<constructor-arg ref="memberdao"/>
+	</bean>
+	
+	<bean id="printer" class="spring.printer.MemberPrinter"/>
+	
+	<bean id="infoPrinter" class="spring.printer.MemberInfoPrinter">
+		<constructor-arg ref="memberdao"/>
+		<constructor-arg ref="printer"/>
+	</bean>
+	
+	<bean id="listprinter" class="spring.printer.MemberListPrinter">
+		<property name="dao" ref="memberdao"/>
+		<property name="printer" ref="printer"/>	
+	</bean>
+	
+	<!-- 생성자로 주입받는 경우 
+	<bean id="versionPrinter" class="spring.printer.VersionPrinter">
+		<constructor-arg value="4"/>
+		<constructor-arg value="1"/>
+	</bean>
+	 -->
+	 <bean id="versionPrinter" class="spring.printer.VersionPrinter">
+		<property name="majorVersion" value="4"/>
+		<property name="minorVersion">
+			<value>1</value>
+		</property>
+	</bean>
+	
+</beans>

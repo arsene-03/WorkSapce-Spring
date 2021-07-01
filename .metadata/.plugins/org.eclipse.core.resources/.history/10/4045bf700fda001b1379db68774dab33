@@ -1,0 +1,19 @@
+package spring.dao;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import spring.vo.Member;
+
+public class MemberDAO {
+	private Map<String,Member> map = new HashMap<>();
+	
+	
+	public Member selectByEmail(String email) {
+		
+	}
+	
+	public void insertMember(Member member) {
+		
+	}
+}

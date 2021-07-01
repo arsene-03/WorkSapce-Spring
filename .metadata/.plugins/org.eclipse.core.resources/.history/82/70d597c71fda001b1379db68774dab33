@@ -1,0 +1,19 @@
+package spring.printer;
+
+import spring.dao.MemberDAO;
+import spring.vo.Member;
+
+public class MemberInfoPrinter { 	//특정 회원 정보 출력
+	
+	private MemberDAO dao;
+	
+	
+	public void setDao(MemberDAO dao) {
+		this.dao = dao;
+	}
+
+
+	public void printMemterInfo(String email) {
+		Member member= dao.selectByEmail(email);
+	}
+}

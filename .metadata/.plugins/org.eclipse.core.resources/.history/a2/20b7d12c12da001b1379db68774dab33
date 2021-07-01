@@ -1,0 +1,25 @@
+package spring.main;
+
+import java.util.Scanner;
+
+public class Main01 {
+
+	public static Scanner scan = new Scanner(System.in);
+	
+	public static void main(String[] args) {
+		// 뷰 서블릿을 호출하는 역할
+		
+		while (true) {
+			System.out.println("명령어를 입력하세요");
+			String command = scan.nextLine();
+			
+			if(command.equalsIgnoreCase("exit")) {
+				System.out.println("프로그램을 종료합니다.");
+				break;
+			}
+			
+		}
+
+	}
+
+}

@@ -1,0 +1,16 @@
+package spring.assembler;
+
+import spring.service.ChangePasswordService;
+import spring.service.MemberRegisterService;
+
+public class Assembler {
+	
+	private MemberDAO dao;
+	private MemberRegisterService regSvc;
+	private ChangePasswordService pwdSvc;
+	
+	public Assembler() {
+		regSvc = new MemberRegisterService();
+		pwdSvc = new ChangePasswordService(dao);
+	}
+}

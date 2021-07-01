@@ -1,0 +1,16 @@
+package spring.service;
+
+import spring.dao.MemberDAO;
+
+public class ChangePasswordService {
+	
+	private MemberDAO dao;
+	
+	public ChangePasswordService(MemberDao dao) {
+		this.dao = dao;
+	}
+	
+	public void changePassword(String email, String oldPassword, String newPassword) {
+		Member m = dao.selectByEmail(email);
+	}
+}
