@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="C:\Study\WorkSapce-Spring\ex05\src\main\java\spring\main\Main04.java"/>
 			<item value="C:\Study\WorkSapce-Spring\ex01"/>
 		</list>
 		<list key="projectNameTemplate">
@@ -49,6 +50,8 @@
 		<list key="name">
 		</list>
 		<list key="artifactId">
+			<item value="ex06"/>
+			<item value="ex05"/>
 			<item value="ex02"/>
 			<item value="ex01"/>
 		</list>
