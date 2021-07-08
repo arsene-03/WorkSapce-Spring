@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+<!-- 공통의 기능을 제공한 클래스를 빈으로 등록 -->
+	<bean id="exeTimeAspect" class="spring.aspect.ExeTimeAspect" />
+	
+<!--  Aspect 설정 :  advice를 어떤 PointCut에 적용할 지를 설정 -->
+	<aop:config proxy-target-class="true">
+		<aop:aspect id="measureAspect" ref="exeTimeAspect">
+		
+			<aop:pointcut expression="execution(public * spring.calc..*(..))" 
+			id="publicMethod"/>
+			
+			<aop:around method="measure" pointcut-ref="publicMethod"/>
+			
+		</aop:aspect>
+	</aop:config>
+
+<!-- 핵심 기능을 제공할 클래스를 빈으로 등록 -->
+	<bean id="impeCal" class="spring.calc.ImpeCalculator" />
+	
+	<bean id="recCal" class="spring.calc.RecCalculator" />
+
+</beans>
+
+
+
+

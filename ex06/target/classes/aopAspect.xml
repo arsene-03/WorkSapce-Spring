@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+<!-- 공통의 기능을 제공한 클래스를 빈으로 등록 -->
+	<bean id="exeTimeAspect" class="spring.aspect.ExeTimeAspect2" />
+	
+	<!--  알아서 aspect 객체를 감지해서 AOP를 적용 시키겠다. -->
+	<aop:aspectj-autoproxy  proxy-target-class="true"/>
+
+<!-- 핵심 기능을 제공할 클래스를 빈으로 등록 -->
+	<bean id="impeCal" class="spring.calc.ImpeCalculator" />
+	
+	<bean id="recCal" class="spring.calc.RecCalculator" />
+
+</beans>

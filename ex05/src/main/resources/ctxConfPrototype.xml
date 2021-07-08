@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="client" class="spring.bean.Client" scope="prototype">
+										<!--     범위가 프로토타입  != 싱글톤  -->
+		<property name="host" value="톰캣 서버" />
+	</bean>
+
+</beans>
