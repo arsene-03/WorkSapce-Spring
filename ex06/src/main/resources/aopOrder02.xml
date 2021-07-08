@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+	<!-- aop 자동적용 -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	
+	<!-- 공통의 기능을 제공할 빈객체 -->
+	<bean id="exeTimeAspect" class="spring.aspect.ExeTimeAspect2"/>
+	<bean id="cacheAspect" class="spring.aspect.CacheAspect2"/>
+	
+	
+	<!-- 핵심 기능을 제공할 빈객체 -->
+	<bean id="impeCalc" class="spring.calc.ImpeCalculator"/>
+
+
+
+</beans>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+	
+<!-- 공통의 기능을 제공할 빈객체 -->
+	<bean id="exeTimeAspect" class="spring.aspect.ExeTimeAspect"/>
+	<bean id="cacheAspect" class="spring.aspect.CacheAspect"/>
+	
+<!-- AOP 설정 -->
+	<aop:config>
+		<aop:aspect id="measureAspect" ref="exeTimeAspect" order="0">
+			<aop:pointcut expression="execution(public * spring.calc..*(..))" id="publicMethod"/>
+			<aop:around method="measure" pointcut-ref="publicMethod"/>
+		</aop:aspect>
+		<aop:aspect id="cacheAspect" ref="cacheAspect" order="1"> <!-- order가 작을수록 우선순위 높음 -->
+			<aop:pointcut expression="execution(public * spring.calc..*(..))" id="calcCachemethod"/>
+			<aop:around method="execute" pointcut-ref="calcCachemethod"/>
+		</aop:aspect>
+	</aop:config>	
+	
+	
+<!-- 핵심 기능을 제공할 빈객체 -->
+	<bean id="impeCalc" class="spring.calc.ImpeCalculator"/>
+	
+</beans>

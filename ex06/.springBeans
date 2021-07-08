@@ -9,6 +9,8 @@
 	<configs>
 		<config>src/main/resources/aopPojo01.xml</config>
 		<config>src/main/resources/aopAspect.xml</config>
+		<config>src/main/resources/aopOrder01.xml</config>
+		<config>src/main/resources/aopOrder02.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

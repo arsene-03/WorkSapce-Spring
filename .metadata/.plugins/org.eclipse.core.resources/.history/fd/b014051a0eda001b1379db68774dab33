@@ -1,8 +1,0 @@
-package spring.vo;
-
-public class RegisterRequest {	//회원가입시 입력받을 정보
-	private String email;
-	private String password;
-	private String confirmPassword;
-
-}
