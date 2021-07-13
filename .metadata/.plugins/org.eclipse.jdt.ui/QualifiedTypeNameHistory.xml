@@ -57,4 +57,6 @@
 <fullyQualifiedTypeName name="spring.exception.MemberNotFoundExcaption"/>
 <fullyQualifiedTypeName name="javax.xml.ws.RequestWrapper"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
 </qualifiedTypeNameHistroy>
