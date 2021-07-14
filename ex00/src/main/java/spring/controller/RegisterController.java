@@ -135,6 +135,7 @@ public class RegisterController {
 			memberRegisterService.regist(regReq);
 			return "register/step3";
 		}catch(AlreadyExistionMemberException e) {
+			errors.rejectValue("email", "duplicate"); // 이메일이 중복이 됩니다.
 			return "register/step2";
 		}
 		

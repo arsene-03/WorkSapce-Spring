@@ -17,4 +17,17 @@
 	<!-- 요청 매핑을 바로 jsp로 연결시켜주는 설정 :/main => main.jsp로 연결-->
 	
 	<bean id="surbeyController" class="spring.controller.SurveyController"/>
+	
+	<bean id="loginController" class="spring.controller.LoginController">
+		<property name="authService" ref="authSvc" />
+	</bean>
+	
+	<bean class="spring.controller.LogoutController"/>
+
+	<bean id="changePwdController" class="spring.controller.ChangePwdController">
+		<constructor-arg ref="changePwdSvc" />
+	</bean>
+	
+	
+	
 </beans>

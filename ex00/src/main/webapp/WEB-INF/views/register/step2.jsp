@@ -23,18 +23,21 @@
 			<label><spring:message code="name"/>:<br>
 			<form:input path="name"/>
 				<%-- <input type="text" name="name" id="name" value="${formData.name}"> --%>
+			<form:errors path="name"/>
 			</label>
 		</p>
 		<p>
 			<label><spring:message code="password"/>:<br>
 			<form:password path="password"/>
 				<!-- <input type="password" name="password" id="password"> -->
+				<form:errors path="password"/>
 			</label>
 		</p>
 		<p>
 			<label><spring:message code="password.confirm"/>:<br>
 			<form:password path="confirmPassword"/>
 				<!-- <input type="password" name="confirmPassword" id="confirmPassword"> -->
+				<form:errors path="confirmPassword"/>
 			</label>
 		</p>
 		<input type="submit" value="<spring:message code="register.btn"/>">

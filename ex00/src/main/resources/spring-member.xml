@@ -32,4 +32,9 @@
 		<constructor-arg ref="memberDao"/>
 	</bean>
 	
+	<bean id="authSvc" class="spring.service.AuthService">
+		<property name="dao" ref="memberDao" />
+	</bean>
+	
+	
 </beans>
