@@ -19,5 +19,5 @@ public class LoginCommandValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required");
 		
 	}
-	
+
 }

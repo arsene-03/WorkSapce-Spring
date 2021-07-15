@@ -1,9 +1,8 @@
 package spring.survey;
 
-public class Respondent {//ÀÀ´äÀÚ Á¤º¸
+public class Respondent { // ì‘ë‹µì ì •ë³´
 	private int age;
 	private String location;
-	
 	
 	public int getAge() {
 		return age;
@@ -17,6 +16,4 @@ public class Respondent {//ÀÀ´äÀÚ Á¤º¸
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	
-	
 }

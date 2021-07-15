@@ -12,44 +12,46 @@ import spring.vo.RegisterRequest;
 public class RegisterRequestValidator implements Validator{
 	
 	private static final String EMAIL_EXP = 
-			"^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$";
-
+			"^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$"; 
+	
 	private Pattern pattern;
 	
 	public RegisterRequestValidator(){
 		pattern = Pattern.compile(EMAIL_EXP);
 	}
-	
+
 	@Override
-	public boolean supports(Class<?> clazz) { // °ËÁõÇÒ °´Ã¼°¡ ¸Â´ÂÁö È®ÀÎ
+	public boolean supports(Class<?> clazz) { // ê²€ì¦í•  ê°ì²´ê°€ ë§ëŠ”ì§€ í™•ì¸
 		return RegisterRequest.class.isAssignableFrom(clazz);
-//	ÆÄ¶ó¹ÌÅÍ·Î Àü´Ş¹ŞÀº °´Ã¼°¡ RegisterRequest·Î º¯È¯ÀÌ °¡´ÉÇÑÁö¸¦ È®ÀÎ
-//	È®ÀÎÀÌ µÇ¸é ½ºÇÁ¸µ¿¡¼­ ÀÚµ¿ °ËÁõÀ» Ã³¸®67
+// íŒŒë¼ë¯¸í„°ë¡œ ì „ë‹¬ë°›ì€ ê°ì²´ê°€ RegisterRequestë¡œ ë³€í™˜ì´ ê°€ëŠ¥í•œì§€ í™•ì¸
+// í™•ì¸ ì‹œ, ìŠ¤í”„ë§ì—ì„œ ìë™ ê²€ì¦ ì²˜ë¦¬
 	}
 
 	@Override
-	public void validate(Object target, Errors errors) { // ½ÇÁ¦ °ËÁõ ÄÚµå
-// °ËÁõÀÇ ±âÁØÀ» ÀÛ¼º                        °Ë»ç ´ë»ó °´Ã¼        °Ë»ç °á°ú¸¦ ´ãÀ» ¿¡·¯°´Ã¼
-		RegisterRequest regreq = (RegisterRequest)target;    
-		
-		if(regreq.getEmail()==null|| regreq.getEmail().trim().isEmpty()) {
+	public void validate(Object target, Errors errors) { // ì‹¤ì œ ê²€ì¦ ì½”ë“œ
+// ê²€ì¦ ê¸°ì¤€ ì‘ì„±			    ê²€ì‚¬ ëŒ€ìƒ ê°ì²´	   ê²€ì‚¬ ê²°ê³¼ë¥¼ ë‹´ì„ ì—ëŸ¬ê°ì²´(ë°˜í™˜ê°ì²´)
+		RegisterRequest regreq = (RegisterRequest)target;
+		System.out.println("ì¶œë ¥ ì—¬ë¶€ í™•ì¸1");
+		if(regreq.getEmail()==null || regreq.getEmail().trim().isEmpty()) {
 			errors.rejectValue("email", "required");
 		}else {
 			Matcher matcher = pattern.matcher(regreq.getEmail());
-			if(!matcher.matches()) { // ÀÏÄ¡ÇÏÁö ¾Ê´Â´Ù¸é false
+			if(!matcher.matches()) {// ì¼ì¹˜í•˜ì§€ ì•ŠëŠ” ë‹¤ë©´ false
 				errors.rejectValue("email", "bad");
 			}
 		}
+		System.out.println("ì¶œë ¥ ì—¬ë¶€ í™•ì¸2");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "required");
-// ÀÚÁÖ ¹ú¾îÁö´Â ¿¡·¯ °ËÁõ ¹æ¹ıÀÌ ¹Ì¸® Á¤ÀÇµÇ¾î ÀÖ´Ù.
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "required");
+	// ìì£¼ ë²Œì–´ì§€ëŠ” ì—ëŸ¬ ê²€ì¦ ë°©ë²•ì´ ë¯¸ë¦¬ ì •ì˜ ë˜ì–´ ìˆë‹¤. 
+		ValidationUtils.rejectIfEmpty(errors, "password", "required");
+		ValidationUtils.rejectIfEmpty(errors, "confirmPassword", "required");
 		
 		if(!regreq.getPassword().isEmpty()) {
-			if(regreq.isPasswordEqualToConfirmPassword()) {
-				errors.rejectValue("confirmPassword","nomatch");
+			if(!regreq.isPasswordEqualToConfirmPassword()) {
+				errors.rejectValue("confirmPassword", "nomatch");
 			}
 		}
+		System.out.println("ì¶œë ¥ ì—¬ë¶€ í™•ì¸3");
 	}
 	
 }

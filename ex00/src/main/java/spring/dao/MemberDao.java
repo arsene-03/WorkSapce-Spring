@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -26,48 +27,35 @@ public class MemberDao { // 데이터베이스 연결과 쿼리 전송
 	public MemberDao(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-
-
+	
+	private RowMapper<Member> rowMapper = new RowMapper<Member>() {
+						@Override
+						public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+							System.out.println("출력 여부 확인8");
+							Member m = new Member(
+									rs.getString("email"),
+									rs.getString("password"),
+									rs.getString("name"),
+									rs.getTimestamp("regDate")
+								);
+							m.setCode(rs.getLong("id"));
+							return m;
+						}
+		
+					};
+	
 	public Member selectByEmail(String email) {
 		String sql = "SELECT * FROM Member WHERE email=?";
-		
+		System.out.println("출력 여부 확인7");
 		List<Member> results = jdbcTemplate.query(
-				sql,
-				new RowMapper<Member>() {
-
-					@Override
-					public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
-						Member m = new Member(
-								rs.getString("email"),
-								rs.getString("password"),
-								rs.getString("name"),
-								rs.getTimestamp("regDate")
-							);
-						m.setCode(rs.getLong("id"));
-						return m;
-					}
-					
-				},email);
+				sql,rowMapper,email);
+		System.out.println("출력 여부 확인9");
 		return results.isEmpty() ? null : results.get(0);
 	}
 
 	public List<Member> selectAll() {
 		List<Member> results = jdbcTemplate.query(
-				"SELECT * FROM Member ORDER BY id ASC",
-				new RowMapper<Member>() {
-
-					@Override
-					public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
-						Member m = new Member(
-								rs.getString("email"),
-								rs.getString("password"),
-								rs.getString("name"),
-								rs.getTimestamp("regDate")
-							);
-						m.setCode(rs.getLong("id"));
-						return m;
-					}			
-				});
+				"SELECT * FROM Member ORDER BY id ASC",	rowMapper);
 		return results;
 	}
 
@@ -125,5 +113,21 @@ public class MemberDao { // 데이터베이스 연결과 쿼리 전송
 			System.out.println("해당 이메일이 존재하지 않습니다.");
 		}
 	}
+	
+	public List<Member> selectByRegDate(Date from, Date to) {
+		List<Member> result = jdbcTemplate.query(
+				"SELECT * FROM Member WHERE regDate BETWEEN ? AND ? ORDER BY regDate ASC", 
+				rowMapper,from,to);
+		return result;
+	}
+	
+	public Member selectByCode(Long code) {
+		String sql = "SELECT * FROM Member WHERE id=?";
+		List<Member> results = jdbcTemplate.query(sql, rowMapper,code);
+		
+		return results.isEmpty() ? null : results.get(0);
+	}
+	
+	
 	
 }

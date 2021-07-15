@@ -1,10 +1,10 @@
 package spring.vo;
 
-public class LoginCommand {// ÀÔ·Â¹ŞÀº ÀÌ¸ŞÀÏ, ¾ÏÈ£¸¦ Àü´Ş½ÃÄÑÁÙ Å¬·¡½º
+public class LoginCommand { //ì…ë ¥ë°›ì€ ì´ë©”ì¼ ì•”í˜¸ë¥¼ ì „ë‹¬ ì‹œì¼œì¤„ í´ë˜ìŠ¤
 	
 	private String email;
 	private String password;
-	private String rememberEmail;
+	private boolean rememberEmail;  // ì´ë©”ì¼ì¼ ì¿ í‚¤ì— ì €ì¥í•  ì •ë³´
 	
 	public String getEmail() {
 		return email;
@@ -18,12 +18,13 @@ public class LoginCommand {// ÀÔ·Â¹ŞÀº ÀÌ¸ŞÀÏ, ¾ÏÈ£¸¦ Àü´Ş½ÃÄÑÁÙ Å¬·¡½º
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRememberEmail() {
+	public boolean isRememberEmail() {
 		return rememberEmail;
 	}
-	public void setRememberEmail(String rememberEmail) {
+	public void setRememberEmail(boolean rememberEmail) {
 		this.rememberEmail = rememberEmail;
 	}
+
 	
 	
 }

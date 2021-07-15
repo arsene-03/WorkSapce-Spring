@@ -1,10 +1,13 @@
 package spring.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -25,36 +28,56 @@ public class LoginController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public String form(LoginCommand logincommand) {
+	public String form(LoginCommand logincommand,
+			@CookieValue(value="rememberEmail", required=false) Cookie rememberEmail) {
+		if(rememberEmail != null) {
+			logincommand.setEmail(rememberEmail.getValue());
+			logincommand.setRememberEmail(true);
+		}
+		
 		return "login/loginForm";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String submit(LoginCommand logincommand, Errors errors, HttpSession session1, HttpServletRequest session2) {
-		//°ËÁõ
+	public String submit(
+			LoginCommand logincommand, 
+			Errors errors, 
+			HttpSession session1, 
+			HttpServletRequest req, 
+			HttpServletResponse response) {
+		// ê²€ì¦
 		new LoginCommandValidator().validate(logincommand, errors);
 		
-		if(errors.hasErrors()) { //¿¡·¯°¡ ¹ß°ßµÇ¾ú´Â°¡
+		if(errors.hasErrors()) { // ì—ëŸ¬ê°€ ë°œê²¬ë˜ì—ˆëŠ”ê°€??
 			return "login/loginForm";
 		}
 		try {
 			AuthInfo authInfo = 
 					authService.authenticate(logincommand.getEmail(), logincommand.getPassword());
-			// session¿¡ ·Î±×ÀÎ Á¤º¸¸¦ ÀúÀå
-// 			1¹ø¤Š ¹æ¹ı
-			session1.setAttribute("authInfo", authInfo);
-
+		// ì„¸ì…˜ì— ë¡œê·¸ì¸ ì •ë³´ë¥¼ ì €ì¥
+			// 1ë²ˆì§¸ ë°©ë²•
+//			session1.setAttribute("authInfo", authInfo);
+			// 2ë²ˆì§¸ ë°©ë²•
+			HttpSession session2 = req.getSession();
+			session2.setAttribute("authInfo", authInfo);
+			
+			// ì´ë©”ì¼ ì €ì¥ìš© ì¿ í‚¤ ìƒì„±
+			Cookie rememberCookie = new Cookie("rememberEmail",logincommand.getEmail());
+			
+			rememberCookie.setPath("/");
+			if(logincommand.isRememberEmail()) {
+				rememberCookie.setMaxAge(60*60*24*365);
+			}else {
+				rememberCookie.setMaxAge(0);
+			}
+			response.addCookie(rememberCookie);
 			
 			return "login/loginSuccess";
-		} catch (IdPasswordNotMatchingException e) { // ÀÌ¸ŞÀÏÀÌ ¾ø°Å³ª, ºñ¹Ğ¹øÈ£°¡ ¿À·ùÀÎ °æ¿ì
-			 errors.reject("idPasswordNotMatching");
-			 return "login/loginForm";
+		}catch(IdPasswordNotMatchingException e) {// ì´ë©”ì¼ì´ ì—†ê±°ë‚˜ , ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë ¸ì„ ê²½ìš°
+			errors.reject("idPasswordNotMatching");
+			return "login/loginForm";
 		}
-		
-	
 	}
-	
-	
-	
+
 	
 }

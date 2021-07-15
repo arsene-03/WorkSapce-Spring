@@ -1,6 +1,6 @@
 package spring.vo;
 
-public class ChangePwdCommand {
+public class ChangePwdCommand { //암호 변경 커맨드 객체
 	
 	private String currentPassword;
 	private String newPassword;
@@ -9,7 +9,7 @@ public class ChangePwdCommand {
 	public String getCurrentPassword() {
 		return currentPassword;
 	}
-	public void setCurrentpassword(String currentPassword) {
+	public void setCurrentPassword(String currentPassword) {
 		this.currentPassword = currentPassword;
 	}
 	public String getNewPassword() {
@@ -18,6 +18,7 @@ public class ChangePwdCommand {
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
 	}
-
 	
+	
+
 }

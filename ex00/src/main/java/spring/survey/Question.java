@@ -3,25 +3,21 @@ package spring.survey;
 import java.util.List;
 
 public class Question {
-	private String title; //Áú¹®
-	private List<String> option; //ÀÀ´ä
+	private String title;			// ì§ˆë¬¸
+	private List<String> option;	// ì‘ë‹µ
 	
 	public Question(String title, List<String> option) {
 		this.title = title;
 		this.option = option;
 	}
-	
-	
 
 	public Question(String title) {
 		this.title = title;
 	}
 	
-	public boolean isChoice() { // ¶óµğ¿À ¹öÆ°À» Ã¼Å© Çß´Â°¡ Ã¼Å©
-		return option != null && option.isEmpty();
+	public boolean isChoice() { // ë¼ë””ì˜¤ ë²„íŠ¼ì„ ì²´í¬í–ˆëŠ”ì§€ ì•Œê¸° ìœ„í•œ ë©”ì„œë“œ
+		return option!=null && !option.isEmpty();
 	}
-
-
 
 	public String getTitle() {
 		return title;
@@ -38,7 +34,5 @@ public class Question {
 	public void setOption(List<String> option) {
 		this.option = option;
 	}
-	
-	
 	
 }

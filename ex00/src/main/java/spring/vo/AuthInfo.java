@@ -1,6 +1,6 @@
 package spring.vo;
 
-public class AuthInfo {// ·Î±×ÀÎ Á¤º¸¸¦ ±â¾ïÇÒ Å¬·¡½º
+public class AuthInfo { // ë¡œê·¸ì¸ ì •ë³´ë¥¼ ê¸°ì–µí•  í´ë˜ìŠ¤
 	
 	private Long id;
 	private String email;
@@ -23,7 +23,6 @@ public class AuthInfo {// ·Î±×ÀÎ Á¤º¸¸¦ ±â¾ïÇÒ Å¬·¡½º
 	public String getName() {
 		return name;
 	}
-	
 	
 	
 }

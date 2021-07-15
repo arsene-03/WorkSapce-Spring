@@ -2,16 +2,16 @@ package spring.survey;
 
 import java.util.List;
 
-public class AnsweredData {//¼³¹®ÀÀ´äÁ¤º¸
+public class AnsweredData { // ì„¤ë¬¸ ì‘ë‹µ ì •ë³´ => ì»¤ë§¨ë“œ ê°ì²´
 	
-	private List<String> response; // ¼³¹®ÀÀ´äÁ¤º¸¸¦ ´ãÀº ¸®½ºÆ®
-	private Respondent res; //ÀÀ´äÀÚ Á¤º¸¸¦ ´ãÀº °´Ã¼(ÁÖ°ÅÁö, ³ªÀÌ)
+	private List<String> responses;	// ì„¤ë¬¸ ì‘ë‹µ ì •ë³´ë¥¼ ë‹´ì€ ë¦¬ìŠ¤íŠ¸
+	private Respondent res;			// ì‘ë‹µì ì •ë³´ë¥¼ ë‹´ì€ ê°ì²´(ì£¼ê±°ì§€, ë‚˜ì´)
 	
-	public List<String> getResponse() {
-		return response;
+	public List<String> getResponses() {
+		return responses;
 	}
-	public void setResponse(List<String> response) {
-		this.response = response;
+	public void setResponses(List<String> responses) {
+		this.responses = responses;
 	}
 	public Respondent getRes() {
 		return res;
@@ -19,6 +19,5 @@ public class AnsweredData {//¼³¹®ÀÀ´äÁ¤º¸
 	public void setRes(Respondent res) {
 		this.res = res;
 	}
-	
 	
 }

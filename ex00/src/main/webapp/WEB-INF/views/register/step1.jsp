@@ -14,6 +14,7 @@
 	<label>
 		<input type="checkbox" name="agree" value="true"><spring:message code="term.agree"/>
 	</label>
+	
 	<input type="submit" value="<spring:message code="next.btn"/>">
 </form>
 </body>
