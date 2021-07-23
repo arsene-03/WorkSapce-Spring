@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+     <context:property-placeholder location="classpath:message/db.properties"/>
+     
+<!--      <bean id="propertyPlaceholderConfigurer" 
+     class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+     	<property name="locations" value="classpath:message/db.properties" />
+     </bean> -->
+
+<!-- 첫번째 빈 : 데이터 소스(커넥션 풀) -->
+	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
+		<!-- <property name="driver" value="oracle.jdbc.OracleDriver"/>
+ 		<property name="url" value="jdbc:oracle:thin:@db.interstander.com:41521:XE"/>
+ 		<property name="username" value="greenJSP"/>
+ 		<property name="password" value="jsp1234"/> -->
+		<property name="driver" value="${db.driver}" />
+		<property name="url"  value="${db.real.jdbcUrl}" />
+		<property name="username"  value="{db.real.user}" />
+		<property name="password"  value="${db.real.password}" />
+	</bean>
+	
+<!-- 두번째 빈 : SqlSessionFactory  -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		
+		<property name="configLocation" 
+		 value="classpath:mybatis/conf/mybatisConfig.xml"/>
+		
+		<property name="mapperLocations" 
+			value="classpath*:mybatis/mappers/*.xml"/>
+	</bean>
+	
+<!-- 세번째 빈 : SqlSession -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+<!-- 네번째 빈 : MemberDao -->
+	<bean id="memberDao" class="spring.dao.MemberDao">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+	
+</beans>

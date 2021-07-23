@@ -30,7 +30,7 @@ public class MemberListController {
 		
 		if(listCommand.getFrom() !=null && listCommand.getTo() !=null) {
 			List<Member> members= 
-					dao.selectByRegDate(listCommand.getFrom(), listCommand.getTo());
+					dao.selectByRegDate(listCommand);
 			
 			model.addAttribute("members",members);
 		}

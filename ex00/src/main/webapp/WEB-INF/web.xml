@@ -9,11 +9,20 @@
 			org.springframework.web.servlet.DispatcherServlet
 		</servlet-class>
 		<init-param>
+			<param-name>spring.profiles.active</param-name>
+			<param-value>test</param-value>
+		</init-param>
+		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				classpath:spring-mvc.xml
 				classpath:spring-member.xml
 				classpath:spring-controller.xml
+				<!-- classpath:spring-db-test.xml
+				classpath:spring-db-real.xml 
+				classpath:spring-dual-db.xml
+				classpath:spring-dual-property-db.xml-->
+				classpath:spring-mybatis.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

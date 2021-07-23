@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+	<context:property-placeholder location="classpath:message/db.properties"/>
+
+	<beans profile="real">
+		<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	 		<property name="driverClass" value="${db.driver}"/>
+	 		<property name="jdbcUrl" value="${db.real.jdbcUrl}"/>
+	 		<property name="user" value="${db.real.user}"/>
+	 		<property name="password" value="${db.real.password}"/>
+	 		<property name="maxPoolSize" value="30"/>
+	 	</bean>
+ 	</beans >
+ 	<beans profile="test">
+	 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	 		<property name="driverClass" value="${db.driver}"/>
+	 		<property name="jdbcUrl" value="${db.test.jdbcUrl}"/>
+	 		<property name="user" value="${db.test.user}"/>
+	 		<property name="password" value="${db.test.password}"/>
+	 	</bean>
+ 	</beans>
+
+</beans>

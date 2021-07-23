@@ -15,6 +15,6 @@
 		</c:forEach>
 	</ul>
 	<p>응답자 거주지 : ${ansData.res.location}</p>
-	<p>응답자 나이 : ${ansData.res}</p>
+	<p>응답자 나이 : ${ansData.res.age}</p>
 </body>
 </html>
